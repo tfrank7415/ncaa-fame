@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/ncaa-fame",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
