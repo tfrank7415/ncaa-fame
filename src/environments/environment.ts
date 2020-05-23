@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: 'AIzaSyDruu1VWEwMO2CcY9mlU9Pd5BdME6Iyq_g',
+    authDomain: 'ncaa-fame.firebaseapp.com',
+    databaseURL: 'https://ncaa-fame.firebaseio.com',
+    projectId: 'ncaa-fame',
+    storageBucket: 'ncaa-fame.appspot.com',
+    messagingSenderId: '940285357670',
+    appId: '1:940285357670:web:197bcdf0393da11dee07a7',
+    measurementId: 'G-H5M9Z2Y2XV'
+  }
 };
 
 /*

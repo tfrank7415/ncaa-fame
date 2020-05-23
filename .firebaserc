@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "ncaa-fame"
+  },
+  "targets": {
+    "ncaa-fame": {
+      "hosting": {
+        "ncaa-fame": [
+          "ncaa-fame"
+        ]
+      }
+    }
   }
 }

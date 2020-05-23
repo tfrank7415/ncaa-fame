@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="form-container">
+        <mat-card class="">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-row justify-content-center">
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" formControlName="email" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row justify-content-center">
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="text" formControlName="password" class="form-control">
+                    </div>
+                </div>
+                <!-- <p *ngIf="unsuccessfulLogin">{{ errorMessage }}</p> -->
+                <div class="form-row justify-content-center">
+                    <button mat-stroked-button type="submit" [disabled]="!registerForm.valid">Register</button>
+                    <button mat-stroked-button type="button" routerLink="/login">Login</button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>
