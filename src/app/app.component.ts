@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ncaa-fame';
+
+  // Injecting authService so we can display/hide certain ui elements if the user is logged in.
+  constructor(private authService: AuthService) {
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }

@@ -6,12 +6,9 @@
         <button mat-menu-item routerLink="">Home</button>
         <button mat-menu-item routerLink="about">About</button>
       </mat-menu>
-      Fame
-      <button mat-button style="float:right" routerLink="/login">Login</button>
-      <button mat-button style="float:right" type="button" (click)="logout()">Logout</button>
-      <!-- Replace the buttons above with the buttons below when authService is set up.
-      <button mat-button style="float:right" *ngIf="!(authService.user | async)" routerLink="/login">Login</button>
-      <button mat-button style="float:right" *ngIf="(authService.user | async)" type="button" (click)="logout()">Logout</button> -->
+      <img src="../assets/images/F-svg.svg" id="fameImage" routerLink="/">
+      <button mat-button style="float:right" *ngIf='!(authService.user | async)' routerLink="/login">Login</button>
+      <button mat-button style="float:right" *ngIf='(authService.user | async)' type="button" (click)="logout()">Logout</button>
     </mat-toolbar-row>
   </mat-toolbar>
   <router-outlet></router-outlet>

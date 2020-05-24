@@ -32,26 +32,14 @@ export class LoginComponent implements OnInit {
   }
 
   // Called when user submits form
-  onSubmit() {
+  async onSubmit() {
     this.unsuccessfulLogin = false;
-    this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
+    await this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
     .then( data => { this.displayErrorMessage(data); } );
 
     if (this.unsuccessfulLogin === false) {
       this.router.navigateByUrl('');
     }
-    // .then( data => this.loginMessage = data)
-    // .then(() => this.unsuccessfulLogin = true);
-    // .catch(data => console.log(data));
-    // .then(data => this.loginMessage = data);
-    // console.log(x);
-    // try {
-    //   this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password);
-    // } catch (e) {
-    //   alert(e);
-    // }
-    // .then()
-    // .catch();
   }
 
   // TODO: move this method to a service.  Maybe create an error service.
@@ -68,6 +56,7 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Invalid email.  Enter an actual email address.';
       this.unsuccessfulLogin = true;
     }
+    // console.log(data);
     this.resetFormGroupValues();
   }
   // Called when logout button is clicked.

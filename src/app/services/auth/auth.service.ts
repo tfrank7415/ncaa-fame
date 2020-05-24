@@ -25,6 +25,7 @@ export class AuthService {
     // We do not have a then because we don't need return any error code if login is a success
     // Triggered if user is not registered or invalid login credentials
     .catch((error) => {
+      console.log('Error: ' + error.code);
       return error.code;
     });
   }
