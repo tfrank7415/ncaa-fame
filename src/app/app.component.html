@@ -7,8 +7,8 @@
         <button mat-menu-item routerLink="about">About</button>
       </mat-menu>
       <img src="../assets/images/F-svg.svg" id="fameImage" routerLink="/">
-      <button mat-button style="float:right" *ngIf='!(authService.user | async)' routerLink="/login">Login</button>
-      <button mat-button style="float:right" *ngIf='(authService.user | async)' type="button" (click)="logout()">Logout</button>
+      <button mat-button style="float:right" *ngIf='!(authService.user | async)' routerLink="/login" id="loginButton">Login</button>
+      <button mat-button style="float:right" *ngIf='(authService.user | async)' type="button" (click)="logout()" id="logoutButton">Logout</button>
     </mat-toolbar-row>
   </mat-toolbar>
   <router-outlet></router-outlet>
