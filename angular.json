@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "ncaa-fame"
+  "defaultProject": "ncaa-fame",
+  "cli": {
+    "analytics": "3cb5de34-114f-4bc8-8726-c0d685bc9f6c"
+  }
 }
