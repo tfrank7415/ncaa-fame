@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { error } from 'util';
 import { Router } from '@angular/router';
 
 @Component({
@@ -56,8 +55,8 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Invalid email.  Enter an actual email address.';
       this.unsuccessfulLogin = true;
     }
-    // console.log(data);
     this.resetFormGroupValues();
+    // console.log(data);
   }
   // Called when logout button is clicked.
   logout() {

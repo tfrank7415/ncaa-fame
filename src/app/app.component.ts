@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'ncaa-fame';
 
   // Injecting authService so we can display/hide certain ui elements if the user is logged in.
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
   }
 
   logout() {

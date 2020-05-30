@@ -8,29 +8,41 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from 'src/app/app.component';
+import { AuthMasterService } from './auth-master.service';
 
 // Arrange
 // Act
 // Assert
 
 describe('AuthService', () => {
-  let service: AuthService;
+    let masterService: AuthMasterService;
+    let authServiceSpy: jasmine.SpyObj<AuthService>;
 
-  // dependencies that AuthSerive need
-  let db: AngularFireDatabase;
-  let firebaseAuth: AngularFireAuth;
+    beforeEach(() => {
+        const spy = jasmine.createSpyObj('AuthService', ['loginUser', 'registerUser']);
 
-  beforeEach(() => {
-    TestBed.configureTestingModule( { providers: [AuthService] } );
-    // service = new AuthService(db, firebaseAuth); });
-  });
-  it('#loginUser should return value from promise',
-    (done: DoneFn) => {
-      // service = TestBed.inject
-      service.loginUser('johndoe@gmail.com', 'password')
-      .then(value => {expect(value).toBe(firebaseAuth.authState);
-                      done();
+        TestBed.configureTestingModule({
+            providers: [
+                AuthMasterService,
+                { provide: AuthService, useValue: spy }
+            ]
+        });
+        masterService = TestBed.inject(AuthMasterService);
+        authServiceSpy = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
     });
+
+    it('#loginUser should return promise value without error message', () => {
+        // So I can also do promise.reject(new Error('error code')) to return errors.
+        const stubValue = Promise.resolve();
+
+        authServiceSpy.loginUser.and.returnValue(stubValue);
+
+        expect(masterService.loginUser('johndoe@gmail.com', 'password'))
+            .toBe(stubValue, 'service returned promise without error data');
+        expect(authServiceSpy.loginUser.calls.count())
+            .toBe(1, 'spy method was called once');
+        expect(authServiceSpy.loginUser.calls.mostRecent().returnValue)
+            .toBe(stubValue);
     });
 });
 
