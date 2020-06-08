@@ -29,6 +29,7 @@ export class AuthService {
       return error.code;
     });
   }
+
   registerUser(email: string, password: string): Promise<any> {
     return this.firebaseAuth.createUserWithEmailAndPassword(email, password)
     .catch((error) => {

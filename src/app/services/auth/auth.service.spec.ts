@@ -44,6 +44,46 @@ describe('AuthService', () => {
         expect(authServiceSpy.loginUser.calls.mostRecent().returnValue)
             .toBe(stubValue);
     });
+
+    it('#loginUser should return promise value with error message', () => {
+        const stubValue = Promise.reject('invalid password');
+
+        authServiceSpy.loginUser.and.returnValue(stubValue);
+
+        // pass incorrect password
+        expect(masterService.loginUser('johndoe@gmail.com', 'wrongpassword'))
+            .toBe(stubValue, 'service returned promise with error data');
+        expect(authServiceSpy.loginUser.calls.count())
+            .toBe(1, 'spy method was called once');
+        expect(authServiceSpy.loginUser.calls.mostRecent().returnValue)
+            .toBe(stubValue);
+    });
+
+    it('#registerUser should return promise value without error message', () => {
+        const stubValue = Promise.resolve();
+
+        authServiceSpy.registerUser.and.returnValue(stubValue);
+
+        expect(masterService.registerUser('johnsmoe@gmail.com', 'newaccount'))
+            .toBe(stubValue, 'service returned promise without error data');
+        expect(authServiceSpy.registerUser.calls.count())
+            .toBe(1, 'spy method was called once');
+        expect(authServiceSpy.registerUser.calls.mostRecent().returnValue)
+            .toBe(stubValue);
+    });
+
+    it('#registerUser should return promise value with error message', () => {
+        const stubValue = Promise.reject('Account already exists');
+
+        authServiceSpy.registerUser.and.returnValue(stubValue);
+
+        expect(masterService.registerUser('johndoe@gmail.com', 'password'))
+            .toBe(stubValue, 'service returned promise with error data');
+        expect(authServiceSpy.registerUser.calls.count())
+            .toBe(1, 'spy method was called once');
+        expect(authServiceSpy.registerUser.calls.mostRecent().returnValue)
+            .toBe(stubValue);
+    });
 });
 
 
