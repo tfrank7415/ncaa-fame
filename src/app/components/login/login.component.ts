@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   unsuccessfulLogin;
   errorCode;
   loginWithGoogleWithRedirect = false;
+  userInfo;
 
   // authState = new Observable((observer) => {
   //   observer.next(console.log('Next'));
@@ -43,7 +44,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     // BIG BRAIN
     this.authService.user.subscribe(
-      value => {console.log(value); },
+      user => {
+        if (user == null) {
+          console.log('Null');
+        } else {
+          console.log(user);
+          // User is logged in. Go to home page.
+          // this.router.navigateByUrl('');
+        } },
       err => {console.log(err); }
     );
   }
@@ -63,21 +71,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  isUserLoggedIn(user) {
-    if (user) {
-      // this.authService.getRedirectResultsFromGoogle()
-      // .then( data => { console.log(data); } );
-      alert(user);
-    } else {
-      alert('Not logged in');
-      return;
-    }
-  }
-
   async loginWithGoogle() {
     this.authService.loginUserWithGoogle()
     // .then(await this.authService.getRedirectResultsFromGoogle())
-    .then( data => { console.log(data); } );
+    // .then( data => { data }
+    .then( data => {
+      this.userInfo = data;
+      if (this.userInfo.additionalUserInfo.isNewUser === true) {
+        // TODO: CREATE ACCOUNT PAGE
+        // this.router.navigateByUrl('createAccount');
+        console.log('Create account');
+      } else {
+
+      }
+      // console.log(this.userInfo.additionalUserInfo.isNewUser);
+     } );
   }
 
   // TODO: move this method to a service.  Maybe create an error service.
