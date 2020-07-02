@@ -10,12 +10,14 @@ import * as firebase from 'firebase';
 export class AuthService {
   userCredentialTemp: any;
   user: Observable<firebase.User>;
+  provider;
 
   constructor(
     private db: AngularFireDatabase,
-    private firebaseAuth: AngularFireAuth
+    private firebaseAuth: AngularFireAuth,
   ) {
      this.user = firebaseAuth.authState;
+     this.provider = new firebase.auth.GoogleAuthProvider();
   }
 
   // Service to login user with email and password
@@ -35,6 +37,22 @@ export class AuthService {
     .catch((error) => {
       return error.code;
     });
+  }
+
+  loginUserWithGoogle(): Promise<any> {
+    // return firebase.auth().signInWithRedirect(this.provider)
+    return firebase.auth().signInWithPopup(this.provider)
+    .catch((error) => {
+      return error.code;
+    });
+  }
+
+  getRedirectResultsFromGoogle(): Promise<any> {
+    return firebase.auth().getRedirectResult();
+  }
+
+  getCurrentUser() {
+    return firebase.auth().currentUser;
   }
 
   logout() {

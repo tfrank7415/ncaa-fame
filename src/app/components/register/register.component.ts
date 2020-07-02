@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
     ) {
     this.registerForm = this.formBuilder.group({
       email: ['', Validators.required],
-      password: ['', Validators.required,]
+      password: ['', Validators.required, ]
       });
 }
 
@@ -26,6 +26,9 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.authService.registerUser(this.registerForm.value.email, this.registerForm.value.password)
+    // TODO: 1. Redirect user to home page when they register.
+            //  2. Display error message if password is not complex enough
+            //     or username is already taken.
     .then();
   }
 

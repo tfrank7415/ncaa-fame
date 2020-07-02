@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm;
   errorMessage;
   unsuccessfulLogin;
   errorCode;
+  loginWithGoogleWithRedirect = false;
+
+  // authState = new Observable((observer) => {
+  //   observer.next(console.log('Next'));
+  //   observer.complete();
+  // });
 
   constructor(
     private authService: AuthService,
@@ -28,7 +35,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Why can't I create an method of type observable which observes
+    // this.user in my service class.  Then if changes happen I will know
+
+    // I will need to subscribe to the observable in
+    // authService here.
+
+    // BIG BRAIN
+    this.authService.user.subscribe(
+      value => {console.log(value); },
+      err => {console.log(err); }
+    );
   }
+
+  ngOnDestroy() {
+  }
+
 
   // Called when user submits form
   async onSubmit() {
@@ -39,6 +61,23 @@ export class LoginComponent implements OnInit {
     if (this.unsuccessfulLogin === false) {
       this.router.navigateByUrl('');
     }
+  }
+
+  isUserLoggedIn(user) {
+    if (user) {
+      // this.authService.getRedirectResultsFromGoogle()
+      // .then( data => { console.log(data); } );
+      alert(user);
+    } else {
+      alert('Not logged in');
+      return;
+    }
+  }
+
+  async loginWithGoogle() {
+    this.authService.loginUserWithGoogle()
+    // .then(await this.authService.getRedirectResultsFromGoogle())
+    .then( data => { console.log(data); } );
   }
 
   // TODO: move this method to a service.  Maybe create an error service.
