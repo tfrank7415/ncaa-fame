@@ -43,13 +43,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     // authService here.
 
     // BIG BRAIN
+    // Subscribing to the user observable in authService
     this.authService.user.subscribe(
       user => {
         if (user == null) {
-          console.log('Null');
+          // console.log('Null');
         } else {
-          console.log(user);
           // User is logged in. Go to home page.
+          // console.log(user);
           // this.router.navigateByUrl('');
         } },
       err => {console.log(err); }
@@ -72,19 +73,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   async loginWithGoogle() {
-    this.authService.loginUserWithGoogle()
-    // .then(await this.authService.getRedirectResultsFromGoogle())
-    // .then( data => { data }
+    await this.authService.loginUserWithGoogle()
     .then( data => {
       this.userInfo = data;
+      // If users first time to login via google
+      // redirect to create account page.
       if (this.userInfo.additionalUserInfo.isNewUser === true) {
         // TODO: CREATE ACCOUNT PAGE
-        // this.router.navigateByUrl('createAccount');
-        console.log('Create account');
+        this.router.navigateByUrl('create-account');
       } else {
-
+        this.router.navigateByUrl('');
       }
-      // console.log(this.userInfo.additionalUserInfo.isNewUser);
      } );
   }
 

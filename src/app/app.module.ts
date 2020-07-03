@@ -16,13 +16,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     ReactiveFormsModule,
     MatCardModule,
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
