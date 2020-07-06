@@ -18,6 +18,11 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+import { HttpClientModule } from '@angular/common/http';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,12 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatCardModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    MatStepperModule
+    MatStepperModule,
+    MatRadioModule,
+    HttpClientModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

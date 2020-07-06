@@ -1,14 +1,62 @@
 <div class="container">
     <mat-vertical-stepper>
-        <mat-step>
-            <ng-template matStepLabel>
-                Athlete (Seller) or Buyer?
-            </ng-template>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>
-                College
-            </ng-template>
-        </mat-step>
+        <form [formGroup]="createAccountForm">
+            <mat-step>
+                <ng-template matStepLabel>
+                    Athlete (Seller) or Fan (Buyer)?
+                </ng-template>
+                <mat-radio-group class="form-group" formControlName="role" [(ngModel)]="createAccountForm.role">
+                    <mat-radio-button *ngFor="let role of roles" [value]="role">
+                        {{ role }}
+                    </mat-radio-button>
+                </mat-radio-group>
+                <div>Selected: {{ createAccountForm.role }}</div>
+                <div *ngIf="createAccountForm.role == 'Athlete'">Show another step relevant to athlete</div>
+                <div *ngIf="createAccountForm.role == 'Fan'">Show n aother step relevant to fans</div>
+            </mat-step>
+            <mat-step *ngIf="createAccountForm.role == 'Athlete'">
+                <ng-template matStepLabel>
+                    Athlete
+                </ng-template>
+
+                <!-- <mat-form-field>
+                    <mat-label>Search for College</mat-label>
+                    <input type="text" 
+                        matInput
+                        [formControl]="collegeSearchBox" 
+                        [matAutocomplete]="auto"
+                        (keydown)='collegeSearchBoxChange()'>
+                    <mat-autocomplete autoActiveFirstOptions #auto="matAutocomplete">
+                        <mat-option *ngFor="let college of filteredOptions | async" [value]="college">
+                            {{ college }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field> -->
+
+                <mat-form-field>
+                    <mat-label>Search for College</mat-label>
+                    <input type="text" 
+                        matInput
+                        [formControl]="collegeSearchBox" 
+                        [matAutocomplete]="auto"
+                        (keydown)='collegeSearchBoxChange()'>
+                    <mat-autocomplete autoActiveFirstOptions #auto="matAutocomplete">
+                        <mat-option *ngFor="let college of filteredColleges | async" [value]="college">
+                            {{ college }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </mat-step>
+            <mat-step *ngIf="createAccountForm.role == 'Fan'">
+                <ng-template matStepLabel>
+                    Fan
+                </ng-template>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>
+                    College
+                </ng-template>
+            </mat-step>
+        </form>
     </mat-vertical-stepper>
 </div>
