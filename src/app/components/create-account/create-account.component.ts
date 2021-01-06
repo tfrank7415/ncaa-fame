@@ -38,7 +38,11 @@ export class CreateAccountComponent implements OnInit {
     ) {
       this.createAccountForm = this.formBuilder.group(
         {
-          role: ['', Validators.required]
+          college: ['', Validators.required],
+          sport: ['', Validators.required],
+          class: ['', Validators.required],
+          position: ['', Validators.required],
+          role: ['', Validators.required],
         });
      }
 
